@@ -17,6 +17,7 @@ QVulkanWindowRenderer* VulkanWindow::createRenderer()
 
     mPlayer =*(&dynamic_cast<Renderer*>(mRenderer)->mPlayer);
 
+
     return mRenderer;
 }
 

@@ -23,6 +23,8 @@ public:
 
     QMatrix4x4 mMatrix;
 
+    virtual void Tick(float DeltaTime);
+
 protected:
     std::string mName;
 };

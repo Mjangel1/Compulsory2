@@ -36,8 +36,11 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     mObjects.at(2)->setName("axis");
 
     mPlayer = new Player();
+    mEnemy = new Enemy();
+
 
     mObjects.push_back(mPlayer);
+    mObjects.push_back(mEnemy);
 
     // **************************************
     // Legger inn objekter i map
@@ -264,6 +267,13 @@ void Renderer::initSwapChainResources()
 
 void Renderer::startNextFrame()
 {
+
+    //update clock
+    auto now = std::chrono::steady_clock::now();
+    deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - lastUpdate).count() / 1000000.0f;
+    lastUpdate = now;
+
+
 	//OEF: Handeling input from keyboard and mouse is done in VulkanWindow
 	//Has to be done each frame to get smooth movement
     mVulkanWindow->handleInput();
@@ -313,9 +323,11 @@ void Renderer::startNextFrame()
     /********************************* Our draw call!: *********************************/
     for (auto it=mObjects.begin(); it!=mObjects.end(); it++)
     {
+        (*it)->Tick(deltaTime);
         mDeviceFunctions->vkCmdBindVertexBuffers(cmdBuf, 0, 1, &(*it)->mBuffer, &vbOffset);
         setModelMatrix(mCamera.cMatrix() * (*it)->mMatrix);
         mDeviceFunctions->vkCmdDraw(cmdBuf, (*it)->mVertices.size(), 1, 0, 0);
+
     }
     // Alternativt draw kall ved å traversere unordered map
     /*    for (auto it=mMap.begin(); it!=mMap.end(); it++)
@@ -330,6 +342,9 @@ void Renderer::startNextFrame()
     mDeviceFunctions->vkCmdEndRenderPass(cmdBuf);
     mObjects.at(1)->rotate(1.0f, 0.0f, 0.0f, 1.0f);
     //qDebug() << mObjects.at(1)->mMatrix;
+
+
+
     mWindow->frameReady();
     mWindow->requestUpdate(); // render continuously, throttled by the presentation rate
 }

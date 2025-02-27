@@ -5,10 +5,12 @@
 #include <vector>
 #include <unordered_map>
 #include "Camera.h"
+#include "Enemy.h"
 #include "Player.h"
 #include "Triangle.h"
 #include "TriangleSurface.h"
 #include "VisualObject.h"
+
 
 class Renderer : public QVulkanWindowRenderer
 {
@@ -39,6 +41,11 @@ public:
 
     std::vector<VisualObject*>& getObjects() { return mObjects; }
     std::unordered_map<std::string, VisualObject*>& getMap() { return mMap; }
+
+
+
+    float deltaTime{NULL};
+    std::chrono::steady_clock::time_point lastUpdate;
 
 protected:
 
@@ -85,6 +92,8 @@ private:
     Camera mCamera;
 
     Player* mPlayer;
+
+    Enemy* mEnemy;
 
     friend class VulkanWindow;
 

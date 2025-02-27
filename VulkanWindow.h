@@ -52,6 +52,7 @@ private:
 	class Camera* mCamera{ nullptr };
 
     class Player* mPlayer{nullptr};
+
 };
 
 #endif // VULKANWINDOW_H
