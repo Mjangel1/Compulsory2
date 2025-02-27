@@ -24,9 +24,12 @@ Player::Player(): VisualObject()
 void Player::move(float x,float y, float z)
 {
 
-    float XDirection = x*mSpeed;
-    float YDirection =
+    float XDirection= x*mSpeed;
+    float YDirection= y*mSpeed;
 
-qDebug() << "Player moved to position:" << mMatrix.column(3);
+
+    mMatrix.translate(XDirection, YDirection,z);
+
+    qDebug() << "Player moved to position:" << mMatrix.column(3);
 
 }

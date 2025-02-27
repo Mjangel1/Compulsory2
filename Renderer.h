@@ -84,7 +84,7 @@ private:
 
     Camera mCamera;
 
-    Player mPlayer;
+    Player* mPlayer;
 
     friend class VulkanWindow;
 

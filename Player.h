@@ -8,10 +8,12 @@ public:
     Player();
 
     float mSpeed = 0.05;
+    float XDirection{NULL};
+    float YDirection{NULL};
 
 
 
-    void move(float x,float y = 0.0f, float z = 0.0f) override;
+    void move(float x,float y,float z ) override;
 
 
 

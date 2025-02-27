@@ -35,8 +35,9 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     mObjects.at(1)->setName("quad");
     mObjects.at(2)->setName("axis");
 
+    mPlayer = new Player();
 
-    mObjects.push_back(new Player());
+    mObjects.push_back(mPlayer);
 
     // **************************************
     // Legger inn objekter i map

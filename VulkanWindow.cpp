@@ -14,7 +14,8 @@ QVulkanWindowRenderer* VulkanWindow::createRenderer()
     //Camera is made when the renderer is made, so we know it is valid now
 	//We set values on the camera a lot from this class, so it is convenient to have a pointer to it
 	mCamera = &dynamic_cast<Renderer*>(mRenderer)->mCamera;
-    mPlayer = &dynamic_cast<Renderer*>(mRenderer)->mPlayer;
+
+    mPlayer =*(&dynamic_cast<Renderer*>(mRenderer)->mPlayer);
 
     return mRenderer;
 }
@@ -92,12 +93,13 @@ void VulkanWindow::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_W)
     {
         mInput.W = true;
-       mPlayer->move(0.1,0,0);
+       //mPlayer->move(0,1,0);
 
 
     }
     if(event->key() == Qt::Key_S)
     {
+
         mInput.S = true;
     }
     if(event->key() == Qt::Key_D)
@@ -251,7 +253,7 @@ void VulkanWindow::handleInput()
     if (mInput.RMB)
     {
         if (mInput.W)
-            mCamera->setSpeed(-mCameraSpeed);
+        mCamera->setSpeed(-mCameraSpeed);
         if (mInput.S)
             mCamera->setSpeed(mCameraSpeed);
         if (mInput.D)
@@ -263,4 +265,25 @@ void VulkanWindow::handleInput()
         if (mInput.E)
             mCamera->updateHeigth(mCameraSpeed);
     }
+    else
+    {
+        if (mInput.W)
+        {
+            mPlayer->move(0,1,0);
+        }
+        if (mInput.S)
+        {
+            mPlayer->move(0,-1,0);
+        }
+        if (mInput.D)
+        {
+            mPlayer->move(1,0,0);
+        }
+        if (mInput.A)
+        {
+            mPlayer->move(-1,0,0);
+        }
+    }
+
+
 }
