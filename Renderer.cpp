@@ -321,7 +321,7 @@ void Renderer::startNextFrame()
     mDeviceFunctions->vkCmdSetScissor(cmdBuf, 0, 1, &scissor);
 
     /********************************* Our draw call!: *********************************/
-    for (auto it=mObjects.begin(); it!=mObjects.end(); it++)
+    for (std::vector<VisualObject*>::iterator it=mObjects.begin(); it!=mObjects.end(); it++)
     {
         (*it)->Tick(deltaTime);
         mDeviceFunctions->vkCmdBindVertexBuffers(cmdBuf, 0, 1, &(*it)->mBuffer, &vbOffset);

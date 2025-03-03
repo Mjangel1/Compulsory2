@@ -10,14 +10,20 @@ public:
 
    void Tick(float DeltaTime) override;
 
+private:
 
-   int T{0};
 
    QVector3D CurrentPosition;
 
+
+
+
+public:
+    int T{0};
+    float Speed;
+
    //QVector3D PatrolPos[2];
    QVector<QVector3D> PatrolPos;
-
 
     void Patrol(QVector3D Position);
 

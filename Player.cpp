@@ -4,13 +4,13 @@ Player::Player(): VisualObject()
 {
 
     Vertex v1{0.0f,   0.0f,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-    Vertex v2{0.50f,   0.0f,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-    Vertex v3{0.0f,   0.50f,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-    Vertex v4{0.50f,   0.50f,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-    Vertex v5{0.0f,   0.0f,  0.50f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-    Vertex v6{0.50f,   0.0f,  0.50f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-    Vertex v7{0.0f,   0.50f,  0.50f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-    Vertex v8{0.50f,   0.50f,  0.50f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+    Vertex v2{X,   0.0f,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+    Vertex v3{0.0f,   Y,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+    Vertex v4{X,   Y,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+    Vertex v5{0.0f,   0.0f,  Z,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+    Vertex v6{X,   0.0f, Z,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+    Vertex v7{0.0f,  Y,  Z,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+    Vertex v8{X,  Y,  Z,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
 
 
 
@@ -92,9 +92,23 @@ void Player::move(float x,float y, float z)
     float XDirection= x*mSpeed;
     float YDirection= y*mSpeed;
 
+    setPosition(GetPosition()+QVector3D(XDirection,YDirection,z));
 
-    mMatrix.translate(XDirection, YDirection,z);
 
-    qDebug() << "Player moved to position:" << mMatrix.column(3);
+   mMatrix.translate(XDirection, YDirection,z);
 
+    qDebug() << "Player moved to position:" << GetPosition();
+
+}
+
+
+void Player::setPosition(const QVector3D &position)
+{
+    CurrentPosition =position;
+}
+
+QVector3D Player::GetPosition() const
+{
+
+    return CurrentPosition;
 }

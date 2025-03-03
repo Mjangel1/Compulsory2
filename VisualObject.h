@@ -23,10 +23,17 @@ public:
 
     QMatrix4x4 mMatrix;
 
+    int drawType{ 0 }; // 0 = fill, 1 = line
+
+
     virtual void Tick(float DeltaTime);
+
+
+    virtual void CreateCollider();
 
 protected:
     std::string mName;
+
 };
 
 #endif // VISUALOBJECT_H

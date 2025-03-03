@@ -39,6 +39,11 @@ void VisualObject::Tick(float DeltaTime)
 
 }
 
+void VisualObject::CreateCollider()
+{
+
+}
+
 void VisualObject::setName(std::string name)
 {
     mName = name;
