@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(): VisualObject()
+Player::Player(): VisualObject(),PlayerCollider(new ColliderSystem())
 {
 
     Vertex v1{0.0f,   0.0f,  0.0f,   0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
@@ -76,13 +76,17 @@ Player::Player(): VisualObject()
 
 
 
+//Collider
 
+    PlayerCollider->SetColliderPosition(CurrentPosition);
+    PlayerCollider->SetSize(QVector3D(X,Y,Z)/2);
 
 
 }
 
 void Player::Tick(float DeltaTime)
 {
+     PlayerCollider->SetColliderPosition(GetPosition());
 
 }
 

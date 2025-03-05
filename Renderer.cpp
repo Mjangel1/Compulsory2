@@ -347,6 +347,14 @@ void Renderer::startNextFrame()
 
     mWindow->frameReady();
     mWindow->requestUpdate(); // render continuously, throttled by the presentation rate
+
+    if(mPlayer->PlayerCollider->CheckCollision(*mEnemy->EnemyCollider))
+    {
+        qDebug() <<"auch" ;
+
+    }
+
+
 }
 
 VkShaderModule Renderer::createShader(const QString &name)

@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy() : VisualObject ()
+Enemy::Enemy() : VisualObject (), EnemyCollider(new ColliderSystem())
 {
     Vertex v1{0.0f,   0.0f,  0.0f,   1.0f, 0.0f, 0.0f, 0.0f, 0.0f};
     Vertex v2{0.50f,   0.0f,  0.0f,   1.0f, 0.0f, 0.0f, 0.0f, 0.0f};
@@ -84,10 +84,16 @@ Enemy::Enemy() : VisualObject ()
 
    mMatrix.translate(CurrentPosition);
 
+
+   //Collider
+   EnemyCollider->SetColliderPosition(CurrentPosition);
+   EnemyCollider->SetSize(QVector3D(0.5,0.5,0.5)/2);
+
 }
 
 void Enemy::Tick(float DeltaTime)
 {
+     EnemyCollider->SetColliderPosition(GetPosition());
     Speed = 1*DeltaTime;
 
 

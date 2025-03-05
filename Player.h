@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "ColliderSystem.h"
 #include "VisualObject.h"
 class Player: public VisualObject
 {
@@ -20,6 +21,8 @@ private:
 
     QVector3D CurrentPosition{};
 
+
+
 public:
     void Tick(float DeltaTime) override;
 
@@ -32,6 +35,7 @@ public:
     void setPosition(const QVector3D &position);
     QVector3D GetPosition() const;
 
+    ColliderSystem* PlayerCollider;
 };
 
 #endif // PLAYER_H

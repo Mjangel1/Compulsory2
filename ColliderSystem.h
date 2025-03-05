@@ -13,8 +13,8 @@ public:
 private:
 
     QVector3D mColliderPosition;
-    QVector3D mMin;
-    QVector3D mMax;
+    QVector3D mSize;
+
 
 
 
@@ -30,13 +30,11 @@ public:
 
     QVector3D GetColliderPosition() const;
 
-    void SetMin(QVector3D Min);
+    void SetSize(QVector3D Size);
 
-    QVector3D GetMin() const;
+    QVector3D GetSize() const;
 
-    void SetMax(QVector3D Max);
 
-    QVector3D GetMax() const;
 
 
 };

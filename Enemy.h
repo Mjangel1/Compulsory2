@@ -1,6 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include "ColliderSystem.h"
 #include "VisualObject.h"
 
 class Enemy : public VisualObject
@@ -18,9 +19,13 @@ private:
 
 
 
+
+
 public:
     int T{0};
     float Speed;
+
+   ColliderSystem* EnemyCollider;
 
    //QVector3D PatrolPos[2];
    QVector<QVector3D> PatrolPos;
