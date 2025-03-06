@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include "Camera.h"
 #include "Enemy.h"
+#include "House.h"
+#include "Keys.h"
 #include "Player.h"
 #include "Triangle.h"
 #include "TriangleSurface.h"
@@ -94,6 +96,10 @@ private:
     Player* mPlayer;
 
     Enemy* mEnemy;
+
+    Keys* mKey1;
+
+    House* mHouse;
 
     friend class VulkanWindow;
 

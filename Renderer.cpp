@@ -27,20 +27,27 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
         }
     }
     // Dag 230125
-    mObjects.push_back(new Triangle());
-    mObjects.push_back((new TriangleSurface()));
-    mObjects.push_back((new WorldAxis()));
+   // mObjects.push_back(new Triangle());
+    //mObjects.push_back((new TriangleSurface()));
+    //mObjects.push_back((new WorldAxis()));
     // Dag 030225
-    mObjects.at(0)->setName("tri");
-    mObjects.at(1)->setName("quad");
-    mObjects.at(2)->setName("axis");
+    //mObjects.at(0)->setName("tri");
+    //mObjects.at(1)->setName("quad");
+    //mObjects.at(2)->setName("axis");
 
     mPlayer = new Player();
     mEnemy = new Enemy();
+    mKey1 = new Keys();
+    mHouse = new House();
 
 
     mObjects.push_back(mPlayer);
     mObjects.push_back(mEnemy);
+    mObjects.push_back(mKey1);
+    mObjects.push_back(mHouse);
+
+   // mObjects.push_back(new Keys());
+
 
     // **************************************
     // Legger inn objekter i map
@@ -50,7 +57,12 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
         mMap.insert(std::pair<std::string, VisualObject*>{(*it)->getName(),*it});
 
 	//Inital position of the camera
-    mCamera.setPosition(QVector3D( 1.0, 1.0, 4.0));
+    mCamera.setPosition(QVector3D( 1.0, 1.0, 20.0));
+
+    //mObjects.at(5)->move(2,2,0);
+    mKey1->setPosition(QVector3D(2,2,0));
+
+    mHouse->setPosition(QVector3D(5,5,0));
 
 	//OEF: need access to our VulkanWindow so making a convenience pointer
 	mVulkanWindow = dynamic_cast<VulkanWindow*>(w);
@@ -340,7 +352,7 @@ void Renderer::startNextFrame()
     }
 */
     mDeviceFunctions->vkCmdEndRenderPass(cmdBuf);
-    mObjects.at(1)->rotate(1.0f, 0.0f, 0.0f, 1.0f);
+   // mObjects.at(1)->rotate(1.0f, 0.0f, 0.0f, 1.0f);
     //qDebug() << mObjects.at(1)->mMatrix;
 
 
@@ -348,11 +360,18 @@ void Renderer::startNextFrame()
     mWindow->frameReady();
     mWindow->requestUpdate(); // render continuously, throttled by the presentation rate
 
-    if(mPlayer->PlayerCollider->CheckCollision(*mEnemy->EnemyCollider))
-    {
-        qDebug() <<"auch" ;
 
+    if(mPlayer->GetCollider()->CheckCollision(*mEnemy->GetCollider()))
+    {
+        mPlayer->OnBeginOverlap(*mEnemy->GetCollider());
     }
+
+    if(mPlayer->GetCollider()->CheckCollision(*mKey1->GetCollider()))
+    {
+        qDebug() << " collected";
+    }
+
+
 
 
 }

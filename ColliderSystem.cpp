@@ -5,7 +5,7 @@ ColliderSystem::ColliderSystem()
 
 }
 
-bool ColliderSystem::CheckCollision(ColliderSystem &OtherCollider)
+bool ColliderSystem::CheckCollision( const ColliderSystem &OtherCollider)
 {
 
     if(mColliderPosition.x() - mSize.x() <= OtherCollider.GetColliderPosition().x() + OtherCollider.mSize.x()
@@ -20,11 +20,6 @@ bool ColliderSystem::CheckCollision(ColliderSystem &OtherCollider)
     }
     else{ return false;}
 
-
-}
-
-void ColliderSystem::OnBeginOverlap(ColliderSystem &OtherCollider)
-{
 
 }
 
@@ -48,6 +43,16 @@ void ColliderSystem::SetSize(QVector3D Size)
 QVector3D ColliderSystem::GetSize() const
 {
     return mSize;
+}
+
+void ColliderSystem::SetName(const QString &Name)
+{
+    mName = Name;
+}
+
+QString ColliderSystem::GetName() const
+{
+    return mName;
 }
 
 

@@ -16,7 +16,7 @@ private:
 
    QVector3D CurrentPosition;
 
-
+    ColliderSystem* EnemyCollider{nullptr};
 
 
 
@@ -25,7 +25,7 @@ public:
     int T{0};
     float Speed;
 
-   ColliderSystem* EnemyCollider;
+
 
    //QVector3D PatrolPos[2];
    QVector<QVector3D> PatrolPos;
@@ -37,6 +37,9 @@ public:
 
     void setPosition(const QVector3D &position);
     QVector3D GetPosition() const;
+
+    void SetCollider(const ColliderSystem &Collider);
+    ColliderSystem* GetCollider()const;
 
 };
 

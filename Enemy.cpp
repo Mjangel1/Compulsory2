@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy() : VisualObject (), EnemyCollider(new ColliderSystem())
+Enemy::Enemy() : VisualObject ()
 {
     Vertex v1{0.0f,   0.0f,  0.0f,   1.0f, 0.0f, 0.0f, 0.0f, 0.0f};
     Vertex v2{0.50f,   0.0f,  0.0f,   1.0f, 0.0f, 0.0f, 0.0f, 0.0f};
@@ -72,7 +72,7 @@ Enemy::Enemy() : VisualObject (), EnemyCollider(new ColliderSystem())
     mVertices.push_back(v8);
     mVertices.push_back(v7);
 
-  mMatrix.translate(CurrentPosition);
+
 
 
   PatrolPos.push_back(QVector3D(1,1,0));
@@ -86,8 +86,10 @@ Enemy::Enemy() : VisualObject (), EnemyCollider(new ColliderSystem())
 
 
    //Collider
+   EnemyCollider = new ColliderSystem();
    EnemyCollider->SetColliderPosition(CurrentPosition);
    EnemyCollider->SetSize(QVector3D(0.5,0.5,0.5)/2);
+   EnemyCollider->SetName("Enemy");
 
 }
 
@@ -166,5 +168,17 @@ QVector3D Enemy::GetPosition() const
 {
 
     return CurrentPosition;
+
+}
+
+void Enemy::SetCollider(const ColliderSystem &Collider)
+{
+    *EnemyCollider = Collider;
+
+}
+
+ColliderSystem* Enemy::GetCollider() const
+{
+    return EnemyCollider;
 
 }
