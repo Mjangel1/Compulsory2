@@ -39,12 +39,14 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     mEnemy = new Enemy();
     mKey1 = new Keys();
     mHouse = new House();
+    mFloor = new Floor();
 
 
     mObjects.push_back(mPlayer);
     mObjects.push_back(mEnemy);
     mObjects.push_back(mKey1);
     mObjects.push_back(mHouse);
+    mObjects.push_back(mFloor);
 
    // mObjects.push_back(new Keys());
 

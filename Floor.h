@@ -1,7 +1,8 @@
 #ifndef FLOOR_H
 #define FLOOR_H
 
-class Floor
+#include "VisualObject.h"
+class Floor : public VisualObject
 {
 public:
     Floor();
