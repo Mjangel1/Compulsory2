@@ -336,6 +336,7 @@ void Renderer::startNextFrame()
     for (std::vector<VisualObject*>::iterator it=mObjects.begin(); it!=mObjects.end(); it++)
     {
         (*it)->Tick(deltaTime);
+        if((*it)->getbPickUp() == true){continue;}
         mDeviceFunctions->vkCmdBindVertexBuffers(cmdBuf, 0, 1, &(*it)->mBuffer, &vbOffset);
         setModelMatrix(mCamera.cMatrix() * (*it)->mMatrix);
         mDeviceFunctions->vkCmdDraw(cmdBuf, (*it)->mVertices.size(), 1, 0, 0);
@@ -360,16 +361,29 @@ void Renderer::startNextFrame()
     mWindow->frameReady();
     mWindow->requestUpdate(); // render continuously, throttled by the presentation rate
 
-
-    if(mPlayer->GetCollider()->CheckCollision(*mEnemy->GetCollider()))
+    for (std::vector<VisualObject*>::iterator it=mObjects.begin(); it!=mObjects.end(); it++)
     {
-        mPlayer->OnBeginOverlap(*mEnemy->GetCollider());
+
+        if(mPlayer->GetCollider().CheckCollision((*it)->GetCollider()))
+        {
+            if((*it)->getName()== "Enemy")
+            {
+               // mPlayer->OnBeginOverlap((*it)->GetCollider());
+            }
+
+            if((*it)->getName()== "Key")
+            {
+                (*it)->SetbPickUp(true);
+                // qDebug() << "bitch";
+            }
+
+
+
+        }
+
+
     }
 
-    if(mPlayer->GetCollider()->CheckCollision(*mKey1->GetCollider()))
-    {
-        qDebug() << " collected";
-    }
 
 
 

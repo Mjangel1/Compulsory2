@@ -74,17 +74,18 @@ House::House() :  VisualObject ()
 
 
     HouseCollider = new ColliderSystem;
-    SetCollider(*HouseCollider);
+
     HouseCollider->SetColliderPosition(HousePosition);
     HouseCollider->SetSize(QVector3D(X,Y,Z)/2);
-    HouseCollider->SetName("House");
+    SetCollider(*HouseCollider);
+
 
 
 }
 
 void House::Tick(float DeltaTime)
 {
-    GetCollider()->SetColliderPosition(HousePosition);
+    GetCollider().SetColliderPosition(HousePosition);
 
 }
 
@@ -100,12 +101,4 @@ QVector3D House::GetPosition() const
     return HousePosition;
 }
 
-void House::SetCollider(const ColliderSystem &Collider)
-{
-    *HouseCollider = Collider;
-}
 
-ColliderSystem *House::GetCollider() const
-{
-    return HouseCollider;
-}

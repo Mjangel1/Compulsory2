@@ -3,6 +3,7 @@
 
 #include <QVulkanWindow>
 #include <vector>
+#include "ColliderSystem.h"
 #include "vertex.h"
 
 class VisualObject
@@ -31,8 +32,19 @@ public:
 
     virtual void CreateCollider();
 
+    void SetbPickUp(bool pickUp);
+    bool getbPickUp()const;
+
+    void SetCollider(const ColliderSystem& collider);
+    ColliderSystem& GetCollider();
+
+
 protected:
     std::string mName;
+
+    bool bPickedUp;
+
+    ColliderSystem Collider;
 
 };
 

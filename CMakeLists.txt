@@ -23,6 +23,7 @@ qt_add_executable(QtVulkanApp
     ColliderSystem.h ColliderSystem.cpp
     Keys.h Keys.cpp
     House.h House.cpp
+    Floor.h Floor.cpp
 
 )
 # Define the shader files

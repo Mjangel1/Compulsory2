@@ -79,17 +79,20 @@ Player::Player(): VisualObject()
 //Collider
 
     PlayerCollider = new ColliderSystem();
-    SetCollider(*PlayerCollider);
+
+
     PlayerCollider->SetColliderPosition(CurrentPosition);
     PlayerCollider->SetSize(QVector3D(X,Y,Z)/2);
-    PlayerCollider->SetName("Player");
+    SetCollider(*PlayerCollider);
+
 
 
 }
 
 void Player::Tick(float DeltaTime)
 {
-     PlayerCollider->SetColliderPosition(GetPosition());
+    GetCollider().SetColliderPosition(GetPosition());
+    qDebug()<< GetCollider().GetColliderPosition();
 
 }
 
@@ -114,12 +117,9 @@ void Player::move(float x,float y, float z)
 
 void Player::OnBeginOverlap(const ColliderSystem &OtherCollider)
 {
-    if(OtherCollider.GetName() == "Enemy")
-    {
-        //bEnableToMove = false;
-        //qDebug() << "Player Died, Movement Disable ";
 
-    }
+     //bEnableToMove = false;
+     qDebug() << "Player Died, Movement Disable ";
 
 }
 
@@ -135,12 +135,4 @@ QVector3D Player::GetPosition() const
     return CurrentPosition;
 }
 
-void Player::SetCollider(const ColliderSystem &Collider)
-{
-    *PlayerCollider = Collider;
-}
 
-ColliderSystem* Player::GetCollider() const
-{
-    return PlayerCollider;
-}

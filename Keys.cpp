@@ -75,10 +75,14 @@ Keys::Keys() : VisualObject ()
     //collider
 
     KeyCollider = new ColliderSystem;
-    SetCollider(*KeyCollider);
+
     KeyCollider->SetColliderPosition(mPosition);
     KeyCollider->SetSize(QVector3D(X,Y,Z)/2);
-    KeyCollider->SetName("Key");
+    SetCollider(*KeyCollider);
+
+    SetbPickUp(false);
+    //tag
+    setName("Key");
 
 
 
@@ -88,7 +92,8 @@ Keys::Keys() : VisualObject ()
 
 void Keys::Tick(float DeltaTime)
 {
-    GetCollider()->SetColliderPosition(GetPosition());
+    GetCollider().SetColliderPosition(GetPosition());
+   //qDebug()<< GetCollider().GetColliderPosition();
 
 }
 
@@ -104,15 +109,7 @@ QVector3D Keys::GetPosition() const
     return mPosition;
 }
 
-void Keys::SetCollider(const ColliderSystem &Collider)
-{
-   *KeyCollider = Collider;
-}
 
-ColliderSystem* Keys::GetCollider() const
-{
-    return KeyCollider;
-}
 
 void Keys::OnBeginOverlap(ColliderSystem &OtherCollider)
 {

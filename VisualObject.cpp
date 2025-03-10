@@ -44,6 +44,26 @@ void VisualObject::CreateCollider()
 
 }
 
+void VisualObject::SetCollider(const ColliderSystem& collider)
+{
+    Collider = collider;
+}
+
+ColliderSystem& VisualObject::GetCollider()
+{
+    return Collider;
+}
+
+void VisualObject::SetbPickUp(bool pickUp)
+{
+    bPickedUp = pickUp;
+}
+
+bool VisualObject::getbPickUp() const
+{
+    return bPickedUp;
+}
+
 void VisualObject::setName(std::string name)
 {
     mName = name;

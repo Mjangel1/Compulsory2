@@ -38,8 +38,6 @@ public:
     void setPosition(const QVector3D &position);
     QVector3D GetPosition() const;
 
-    void SetCollider(const ColliderSystem &Collider);
-    ColliderSystem* GetCollider()const;
 
 };
 

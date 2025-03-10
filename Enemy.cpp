@@ -86,17 +86,24 @@ Enemy::Enemy() : VisualObject ()
 
 
    //Collider
+
    EnemyCollider = new ColliderSystem();
    EnemyCollider->SetColliderPosition(CurrentPosition);
    EnemyCollider->SetSize(QVector3D(0.5,0.5,0.5)/2);
-   EnemyCollider->SetName("Enemy");
+   SetCollider(*EnemyCollider);
+
+   setName("Enemy");
+
+
 
 }
 
 void Enemy::Tick(float DeltaTime)
 {
-     EnemyCollider->SetColliderPosition(GetPosition());
+    GetCollider().SetColliderPosition(GetPosition());
     Speed = 1*DeltaTime;
+    //qDebug()<< GetCollider().GetColliderPosition();
+
 
 
     if(!PatrolPos.empty())
@@ -171,14 +178,4 @@ QVector3D Enemy::GetPosition() const
 
 }
 
-void Enemy::SetCollider(const ColliderSystem &Collider)
-{
-    *EnemyCollider = Collider;
 
-}
-
-ColliderSystem* Enemy::GetCollider() const
-{
-    return EnemyCollider;
-
-}
