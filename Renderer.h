@@ -5,6 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include "Camera.h"
+#include "Door.h"
 #include "Enemy.h"
 #include "Floor.h"
 #include "House.h"
@@ -109,6 +110,8 @@ private:
     House* mHouse;
 
     Floor* mFloor;
+
+    Door* mDoor;
 
     friend class VulkanWindow;
 

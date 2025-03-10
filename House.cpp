@@ -92,6 +92,7 @@ void House::Tick(float DeltaTime)
 void House::setPosition(const QVector3D &position)
 {
     HousePosition= position;
+    mMatrix.setToIdentity();
     mMatrix.translate(HousePosition);
 
 }

@@ -10,7 +10,7 @@ class Keys: public VisualObject
 public:
     Keys();
 
-   virtual void Tick(float DeltaTime) override;
+   void Tick(float DeltaTime) override;
 
 private:
 

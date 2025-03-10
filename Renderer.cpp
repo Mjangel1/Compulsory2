@@ -39,9 +39,11 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
 
     mHouse = new House();
     mFloor = new Floor();
+    mDoor = new Door();
 
 
     mObjects.push_back(mPlayer);
+    mObjects.push_back(mDoor);
 
     mObjects.push_back(mHouse);
     mObjects.push_back(mFloor);
@@ -106,6 +108,10 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     //mObjects.at(5)->move(2,2,0);
 
    mHouse->setPosition(QVector3D(5,10,0));
+    mDoor->setPosition(QVector3D(6,9,0));
+
+
+
 
 
 

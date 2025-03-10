@@ -94,7 +94,7 @@ void Player::Tick(float DeltaTime)
 {
     GetCollider().SetColliderPosition(GetPosition());
     mSpeed = 3* DeltaTime;
-    // qDebug()<< GetCollider().GetColliderPosition();
+    qDebug()<< GetCollider().GetColliderPosition();
 
 }
 
