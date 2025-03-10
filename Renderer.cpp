@@ -36,19 +36,61 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     //mObjects.at(2)->setName("axis");
 
     mPlayer = new Player();
-    mEnemy = new Enemy();
-    mKey1 = new Keys();
+
     mHouse = new House();
     mFloor = new Floor();
 
 
     mObjects.push_back(mPlayer);
-    mObjects.push_back(mEnemy);
-    mObjects.push_back(mKey1);
+
     mObjects.push_back(mHouse);
     mObjects.push_back(mFloor);
 
+    KeysPos.push_back(QVector3D(-15,1,0));
+    KeysPos.push_back(QVector3D(10,-12,0));
+    KeysPos.push_back(QVector3D(3,4,0));
+    KeysPos.push_back(QVector3D(12,6,0));
+    KeysPos.push_back(QVector3D(-10,9,0));
+    KeysPos.push_back(QVector3D(-9,-6,0));
+
+    PatrolPos.push_back(QVector3D(-9,-6,0));
+    PatrolPos.push_back(QVector3D(-10,9,0));
+    PatrolPos.push_back(QVector3D(12,6,0));
+
+    PatrolPos.push_back(QVector3D(3,4,0));
+    PatrolPos.push_back(QVector3D(10,-12,0));
+    PatrolPos.push_back(QVector3D(-15,1,0));
+
+
    // mObjects.push_back(new Keys());
+    for (int var = 0; var < 6; ++var)
+    {
+        mKeys.push_back(new Keys());
+
+        mKeys[var]->setPosition(KeysPos[var]);
+        mObjects.push_back(mKeys[var]);
+
+    }
+
+    int t = 0;
+    for (int i = 0; i < 2; ++i)
+    {
+
+        mEnemy.push_back(new Enemy());
+        mObjects.push_back(mEnemy[i]);
+    }
+
+    mEnemy[0]->setPosition(PatrolPos.at(0));
+    mEnemy[0]->PatrolPos.push_back(PatrolPos.at(0));
+    mEnemy[0]->PatrolPos.push_back(PatrolPos.at(1));
+    mEnemy[0]->PatrolPos.push_back(PatrolPos.at(2));
+
+    mEnemy[1]->setPosition(PatrolPos.at(3));
+
+    mEnemy[1]->PatrolPos.push_back(PatrolPos.at(3));
+    mEnemy[1]->PatrolPos.push_back(PatrolPos.at(4));
+    mEnemy[1]->PatrolPos.push_back(PatrolPos.at(5));
+
 
 
     // **************************************
@@ -59,12 +101,13 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
         mMap.insert(std::pair<std::string, VisualObject*>{(*it)->getName(),*it});
 
 	//Inital position of the camera
-    mCamera.setPosition(QVector3D( 1.0, 1.0, 20.0));
+    mCamera.setPosition(QVector3D( 1.0, 1.0, 30.0));
 
     //mObjects.at(5)->move(2,2,0);
-    mKey1->setPosition(QVector3D(2,2,0));
 
-    mHouse->setPosition(QVector3D(5,5,0));
+   mHouse->setPosition(QVector3D(5,10,0));
+
+
 
 	//OEF: need access to our VulkanWindow so making a convenience pointer
 	mVulkanWindow = dynamic_cast<VulkanWindow*>(w);

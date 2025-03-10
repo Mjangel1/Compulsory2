@@ -75,22 +75,18 @@ Enemy::Enemy() : VisualObject ()
 
 
 
-  PatrolPos.push_back(QVector3D(1,1,0));
-  PatrolPos.push_back(QVector3D(3,3,0));
-  PatrolPos.push_back(QVector3D(0,3,0));
 
 
-  CurrentPosition = PatrolPos[0];
 
-   mMatrix.translate(CurrentPosition);
 
 
    //Collider
 
    EnemyCollider = new ColliderSystem();
+
+    SetCollider(*EnemyCollider);
    EnemyCollider->SetColliderPosition(CurrentPosition);
    EnemyCollider->SetSize(QVector3D(0.5,0.5,0.5)/2);
-   SetCollider(*EnemyCollider);
 
    setName("Enemy");
 
@@ -101,8 +97,8 @@ Enemy::Enemy() : VisualObject ()
 void Enemy::Tick(float DeltaTime)
 {
     GetCollider().SetColliderPosition(GetPosition());
-    Speed = 1*DeltaTime;
-    //qDebug()<< GetCollider().GetColliderPosition();
+    Speed = 4*DeltaTime;
+    qDebug()<< GetCollider().GetColliderPosition();
 
 
 
@@ -133,7 +129,7 @@ void Enemy::Patrol(QVector3D Position)
     else
     {
         setPosition(Position);
-        qDebug() << "Enemy Reached Location";
+       // qDebug() << "Enemy Reached Location";
         T++;
 
         if(T >= PatrolPos.size())
@@ -152,6 +148,7 @@ void Enemy::Patrol(QVector3D Position)
 
 void Enemy::move(float x,float y,float z)
 {
+     mMatrix.setToIdentity();
 
     mMatrix.translate(x,y,z);
 
@@ -166,6 +163,9 @@ void Enemy::setPosition(const QVector3D &position)
 {
 
     CurrentPosition = position;
+     mMatrix.setToIdentity();
+    mMatrix.translate(CurrentPosition);
+
 
 }
 

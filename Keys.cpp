@@ -100,6 +100,7 @@ void Keys::Tick(float DeltaTime)
 void Keys::setPosition(const QVector3D &position)
 {
     mPosition = position;
+     mMatrix.setToIdentity();
     mMatrix.translate(mPosition);
 
 }

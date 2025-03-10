@@ -79,11 +79,12 @@ Player::Player(): VisualObject()
 //Collider
 
     PlayerCollider = new ColliderSystem();
+    SetCollider(*PlayerCollider);
 
 
     PlayerCollider->SetColliderPosition(CurrentPosition);
     PlayerCollider->SetSize(QVector3D(X,Y,Z)/2);
-    SetCollider(*PlayerCollider);
+
 
 
 
@@ -92,7 +93,8 @@ Player::Player(): VisualObject()
 void Player::Tick(float DeltaTime)
 {
     GetCollider().SetColliderPosition(GetPosition());
-    qDebug()<< GetCollider().GetColliderPosition();
+    mSpeed = 3* DeltaTime;
+    // qDebug()<< GetCollider().GetColliderPosition();
 
 }
 

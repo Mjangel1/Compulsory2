@@ -24,6 +24,7 @@ qt_add_executable(QtVulkanApp
     Keys.h Keys.cpp
     House.h House.cpp
     Floor.h Floor.cpp
+    Door.h Door.cpp
 
 )
 # Define the shader files

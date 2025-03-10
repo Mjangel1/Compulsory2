@@ -96,9 +96,15 @@ private:
 
     Player* mPlayer;
 
-    Enemy* mEnemy;
+    //Enemy
 
-    Keys* mKey1;
+   std::vector <Enemy*> mEnemy;
+   QVector<QVector3D> PatrolPos;
+
+    //keys
+    QVector<QVector3D> KeysPos;
+    std::vector <Keys*> mKeys;
+
 
     House* mHouse;
 

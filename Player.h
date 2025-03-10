@@ -15,7 +15,7 @@ private:
     float Y = 0.5f;
     float X = 0.5f;
     float Z = 0.5f;
-    float mSpeed = 0.01;
+    float mSpeed;
     float XDirection{NULL};
     float YDirection{NULL};
 
