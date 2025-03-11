@@ -26,11 +26,12 @@ bool ColliderSystem::CheckCollision( const ColliderSystem &OtherCollider)
 void ColliderSystem::SetColliderPosition(QVector3D ColliderPosition)
 {
 
-    mColliderPosition = ColliderPosition;
+    mColliderPosition = ColliderPosition + GetSize();
 }
 
 QVector3D ColliderSystem::GetColliderPosition() const
 {
+
     return mColliderPosition;
 }
 

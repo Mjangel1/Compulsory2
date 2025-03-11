@@ -39,14 +39,17 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
 
     mHouse = new House();
     mFloor = new Floor();
-    mDoor = new Door();
+    mObjects.push_back(mFloor);
+    //mDoor = new Door();
 
 
     mObjects.push_back(mPlayer);
-    mObjects.push_back(mDoor);
+    // mObjects.push_back(mDoor);
 
-    mObjects.push_back(mHouse);
-    mObjects.push_back(mFloor);
+     mObjects.push_back(mHouse);
+    mHouse->setPosition(QVector3D(5,10,0));
+
+
 
     KeysPos.push_back(QVector3D(-15,1,0));
     KeysPos.push_back(QVector3D(10,-12,0));
@@ -64,7 +67,6 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     PatrolPos.push_back(QVector3D(-15,1,0));
 
 
-   // mObjects.push_back(new Keys());
     for (int var = 0; var < 6; ++var)
     {
         mKeys.push_back(new Keys());
@@ -74,7 +76,7 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
 
     }
 
-    int t = 0;
+
     for (int i = 0; i < 2; ++i)
     {
 
@@ -82,12 +84,13 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
         mObjects.push_back(mEnemy[i]);
     }
 
+
     mEnemy[0]->setPosition(PatrolPos.at(0));
     mEnemy[0]->PatrolPos.push_back(PatrolPos.at(0));
     mEnemy[0]->PatrolPos.push_back(PatrolPos.at(1));
     mEnemy[0]->PatrolPos.push_back(PatrolPos.at(2));
 
-    mEnemy[1]->setPosition(PatrolPos.at(3));
+   mEnemy[1]->setPosition(PatrolPos.at(3));
 
     mEnemy[1]->PatrolPos.push_back(PatrolPos.at(3));
     mEnemy[1]->PatrolPos.push_back(PatrolPos.at(4));
@@ -107,8 +110,11 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
 
     //mObjects.at(5)->move(2,2,0);
 
-   mHouse->setPosition(QVector3D(5,10,0));
-    mDoor->setPosition(QVector3D(6,9,0));
+
+
+
+    //mDoor->setPosition(QVector3D(6,9,0));
+
 
 
 
@@ -412,23 +418,33 @@ void Renderer::startNextFrame()
     mWindow->frameReady();
     mWindow->requestUpdate(); // render continuously, throttled by the presentation rate
 
+
     for (std::vector<VisualObject*>::iterator it=mObjects.begin(); it!=mObjects.end(); it++)
     {
-
-        if(mPlayer->GetCollider().CheckCollision((*it)->GetCollider()))
+        if((*it)!= mPlayer)
         {
-            if((*it)->getName()== "Enemy")
+            if(mPlayer->GetCollider().CheckCollision((*it)->GetCollider()))
             {
-               // mPlayer->OnBeginOverlap((*it)->GetCollider());
+                qDebug() << "Checking collision with: " << (*it)->getName();
+                if((*it)->getName()== "Enemy")
+                {
+                    // mPlayer->OnBeginOverlap((*it)->GetCollider());
+                }
+
+                if((*it)->getName()== "Key")
+                {
+                    //(*it)->SetbPickUp(true);
+                    // qDebug() << "bitch";
+                }
+                if((*it)->getName()== "House")
+                {
+
+
+                }
+
+
+
             }
-
-            if((*it)->getName()== "Key")
-            {
-                (*it)->SetbPickUp(true);
-                // qDebug() << "bitch";
-            }
-
-
 
         }
 

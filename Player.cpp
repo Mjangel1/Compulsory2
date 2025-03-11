@@ -79,11 +79,13 @@ Player::Player(): VisualObject()
 //Collider
 
     PlayerCollider = new ColliderSystem();
-    SetCollider(*PlayerCollider);
+    SetCollider(PlayerCollider);
 
 
     PlayerCollider->SetColliderPosition(CurrentPosition);
-    PlayerCollider->SetSize(QVector3D(X,Y,Z)/2);
+    PlayerCollider->SetSize((QVector3D(X,Y,Z)/2));
+
+    setName("Player");
 
 
 
@@ -92,9 +94,9 @@ Player::Player(): VisualObject()
 
 void Player::Tick(float DeltaTime)
 {
-    GetCollider().SetColliderPosition(GetPosition());
+    GetCollider().SetColliderPosition(GetPosition() );
     mSpeed = 3* DeltaTime;
-    qDebug()<< GetCollider().GetColliderPosition();
+   // qDebug()<< GetCollider().GetColliderPosition();
 
 }
 
@@ -105,6 +107,7 @@ void Player::move(float x,float y, float z)
     {
         return;
     }
+     QVector3D LastPosition = GetPosition();
     float XDirection= x*mSpeed;
     float YDirection= y*mSpeed;
 
@@ -128,7 +131,7 @@ void Player::OnBeginOverlap(const ColliderSystem &OtherCollider)
 
 void Player::setPosition(const QVector3D &position)
 {
-    CurrentPosition =position;
+    CurrentPosition = position;
 }
 
 QVector3D Player::GetPosition() const

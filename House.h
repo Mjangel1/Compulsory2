@@ -9,17 +9,17 @@ class House : public VisualObject
 public:
     House();
 
-    void Tick(float DeltaTime) override;
+   void Tick(float DeltaTime) override;
 
 
 private:
 
 
-    ColliderSystem* HouseCollider;
-    float X {4};
-    float Y {4};
-    float Z {5};
-    QVector3D HousePosition;
+    ColliderSystem* HouseCollider{nullptr};
+    float X = 4;
+    float Y = 4;
+    float Z = 5;
+    QVector3D HousePosition{0,0,0};
 
 
 public:

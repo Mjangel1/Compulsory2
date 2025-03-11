@@ -1,6 +1,6 @@
-#include "Door.h"
+#include "HouseDoor.h"
 
-Door::Door() : VisualObject ()
+HouseDoor::HouseDoor() : VisualObject()
 {
     Vertex v1{0.0f,   0.0f,  0.0f,   0.0f, 0.70f, 1.0f, 0.0f, 0.0f};
     Vertex v2{X,   0.0f,  0.0f,   0.0f, 0.70f, 1.0f, 0.0f, 0.0f};
@@ -72,30 +72,35 @@ Door::Door() : VisualObject ()
     mVertices.push_back(v8);
     mVertices.push_back(v7);
 
-    DoorCollider = new ColliderSystem;
-    SetCollider(*DoorCollider);
+    //Collider
+    DoorCollider = new ColliderSystem();
+    SetCollider(DoorCollider);
+
     DoorCollider->SetColliderPosition(DoorPosition);
-    DoorCollider->SetSize(QVector3D(X,Y,Z)/2);
+    DoorCollider->SetSize(QVector3D(X,Y,Z));
+
     setName("Door");
 
-}
 
-void Door::Tick(float DeltaTime)
-{
 
 }
 
-void Door::setPosition(const QVector3D &position)
+void HouseDoor::Tick(float DeltaTime)
 {
+
+    GetCollider().SetColliderPosition(GetPosition());
+}
+
+void HouseDoor::setPosition(const QVector3D &position)
+{
+
     DoorPosition = position;
     mMatrix.setToIdentity();
     mMatrix.translate(DoorPosition);
+
 }
 
-QVector3D Door::GetPosition() const
+QVector3D HouseDoor::GetPosition() const
 {
     return DoorPosition;
 }
-
-
-

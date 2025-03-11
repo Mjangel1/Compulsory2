@@ -15,7 +15,7 @@ public:
 private:
 
     QVector3D mPosition;
-    ColliderSystem *KeyCollider;
+    ColliderSystem *KeyCollider{nullptr};
 
     float Y = 0.5f;
     float X = 0.5f;

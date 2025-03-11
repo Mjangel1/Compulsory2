@@ -84,9 +84,10 @@ Enemy::Enemy() : VisualObject ()
 
    EnemyCollider = new ColliderSystem();
 
-    SetCollider(*EnemyCollider);
+
+   SetCollider(EnemyCollider);
    EnemyCollider->SetColliderPosition(CurrentPosition);
-   EnemyCollider->SetSize(QVector3D(0.5,0.5,0.5)/2);
+   EnemyCollider->SetSize((QVector3D(0.5,0.5,0.5)/2));
 
    setName("Enemy");
 
@@ -98,7 +99,7 @@ void Enemy::Tick(float DeltaTime)
 {
     GetCollider().SetColliderPosition(GetPosition());
     Speed = 4*DeltaTime;
-    //qDebug()<< GetCollider().GetColliderPosition();
+   // qDebug()<< GetCollider().GetColliderPosition();
 
 
 
@@ -163,7 +164,7 @@ void Enemy::setPosition(const QVector3D &position)
 {
 
     CurrentPosition = position;
-     mMatrix.setToIdentity();
+    mMatrix.setToIdentity();
     mMatrix.translate(CurrentPosition);
 
 

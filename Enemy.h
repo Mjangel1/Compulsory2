@@ -15,7 +15,6 @@ private:
 
 
    QVector3D CurrentPosition;
-
     ColliderSystem* EnemyCollider{nullptr};
 
 

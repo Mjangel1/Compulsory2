@@ -20,11 +20,13 @@ private:
     float YDirection{NULL};
 
     QVector3D CurrentPosition{};
+
      ColliderSystem* PlayerCollider{nullptr};
 
 
 
 public:
+     QVector3D LastPosition{};
 
      bool bEnableToMove = true;
 

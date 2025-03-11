@@ -44,14 +44,20 @@ void VisualObject::CreateCollider()
 
 }
 
-void VisualObject::SetCollider(const ColliderSystem& collider)
+void VisualObject::SetCollider(ColliderSystem* collider)
 {
+
+    if(collider == nullptr)
+    {
+        qDebug() << "Collider pointer is null!";
+        return; // Do not assign if nullptr
+    }
     Collider = collider;
 }
 
 ColliderSystem& VisualObject::GetCollider()
 {
-    return Collider;
+    return *Collider;
 }
 
 void VisualObject::SetbPickUp(bool pickUp)

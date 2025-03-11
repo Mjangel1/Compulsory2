@@ -73,11 +73,15 @@ House::House() :  VisualObject ()
     mVertices.push_back(v7);
 
 
-    HouseCollider = new ColliderSystem;
+    HouseCollider = new ColliderSystem();
+    SetCollider(HouseCollider);
+
 
     HouseCollider->SetColliderPosition(HousePosition);
-    HouseCollider->SetSize(QVector3D(X,Y,Z)/2);
-    SetCollider(*HouseCollider);
+    HouseCollider->SetSize((QVector3D(X,Y,Z)/2));
+    setName("House");
+
+
 
 
 
@@ -85,15 +89,18 @@ House::House() :  VisualObject ()
 
 void House::Tick(float DeltaTime)
 {
-    GetCollider().SetColliderPosition(HousePosition);
-
+    GetCollider().SetColliderPosition(GetPosition());
+    qDebug() <<GetCollider().GetSize();
 }
+
+
 
 void House::setPosition(const QVector3D &position)
 {
-    HousePosition= position;
+    HousePosition = position;
     mMatrix.setToIdentity();
     mMatrix.translate(HousePosition);
+
 
 }
 

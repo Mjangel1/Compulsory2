@@ -75,10 +75,11 @@ Keys::Keys() : VisualObject ()
     //collider
 
     KeyCollider = new ColliderSystem;
+    SetCollider(KeyCollider);
 
     KeyCollider->SetColliderPosition(mPosition);
-    KeyCollider->SetSize(QVector3D(X,Y,Z)/2);
-    SetCollider(*KeyCollider);
+    KeyCollider->SetSize((QVector3D(X,Y,Z)/2));
+
 
     SetbPickUp(false);
     //tag

@@ -14,7 +14,7 @@ public:
     VisualObject();
     void setName(std::string name);
     std::string getName() const;
-   virtual void move(float x, float y = 0.0f, float z = 0.0f);
+    virtual void move(float x, float y = 0.0f, float z = 0.0f);
     void scale(float s);
     void rotate(float t, float x, float y, float z);
 
@@ -35,7 +35,7 @@ public:
     void SetbPickUp(bool pickUp);
     bool getbPickUp()const;
 
-    void SetCollider(const ColliderSystem& collider);
+    void SetCollider( ColliderSystem* collider);
     ColliderSystem& GetCollider();
 
 
@@ -44,7 +44,7 @@ protected:
 
     bool bPickedUp;
 
-    ColliderSystem Collider;
+    ColliderSystem* Collider{nullptr};
 
 };
 
