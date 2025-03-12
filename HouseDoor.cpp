@@ -77,9 +77,10 @@ HouseDoor::HouseDoor() : VisualObject()
     SetCollider(DoorCollider);
 
     DoorCollider->SetColliderPosition(DoorPosition);
-    DoorCollider->SetSize(QVector3D(X,Y,Z));
+    DoorCollider->SetSize((QVector3D(X,Y,Z)/2));
 
     setName("Door");
+    SetbPickUp(true);
 
 
 

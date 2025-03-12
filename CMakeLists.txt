@@ -25,6 +25,7 @@ qt_add_executable(QtVulkanApp
     House.h House.cpp
     Floor.h Floor.cpp
     HouseDoor.h HouseDoor.cpp
+    secondfloor.h secondfloor.cpp
 
 
 )

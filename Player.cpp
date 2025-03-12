@@ -107,9 +107,11 @@ void Player::move(float x,float y, float z)
     {
         return;
     }
-     QVector3D LastPosition = GetPosition();
+
     float XDirection= x*mSpeed;
     float YDirection= y*mSpeed;
+
+    LastPosition = GetPosition();
 
     setPosition(GetPosition()+QVector3D(XDirection,YDirection,z));
 
@@ -123,8 +125,8 @@ void Player::move(float x,float y, float z)
 void Player::OnBeginOverlap(const ColliderSystem &OtherCollider)
 {
 
-     //bEnableToMove = false;
-     qDebug() << "Player Died, Movement Disable ";
+    StopMoving();
+    qDebug() << "Player Died, Movement Disable ";
 
 }
 
@@ -132,12 +134,21 @@ void Player::OnBeginOverlap(const ColliderSystem &OtherCollider)
 void Player::setPosition(const QVector3D &position)
 {
     CurrentPosition = position;
+    mMatrix.setToIdentity();
+    mMatrix.translate(CurrentPosition);
+    GetCollider().SetColliderPosition(CurrentPosition);
 }
 
 QVector3D Player::GetPosition() const
 {
 
     return CurrentPosition;
+}
+
+void Player::StopMoving()
+{
+     bEnableToMove = false;
+
 }
 
 

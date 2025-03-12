@@ -1,4 +1,5 @@
 #include "ColliderSystem.h"
+#include <qdebug.h>
 
 ColliderSystem::ColliderSystem()
 {

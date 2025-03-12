@@ -98,7 +98,7 @@ Enemy::Enemy() : VisualObject ()
 void Enemy::Tick(float DeltaTime)
 {
     GetCollider().SetColliderPosition(GetPosition());
-    Speed = 4*DeltaTime;
+    Speed = 8*DeltaTime;
    // qDebug()<< GetCollider().GetColliderPosition();
 
 

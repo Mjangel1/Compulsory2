@@ -40,14 +40,19 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     mHouse = new House();
     mFloor = new Floor();
     mObjects.push_back(mFloor);
-    //mDoor = new Door();
+    mDoor = new HouseDoor();
+    SecFloor = new SecondFloor();
 
 
     mObjects.push_back(mPlayer);
-    // mObjects.push_back(mDoor);
+     mObjects.push_back(mDoor);
+    mDoor->setPosition(QVector3D(6,9,0));
 
-     mObjects.push_back(mHouse);
+    mObjects.push_back(mHouse);
     mHouse->setPosition(QVector3D(5,10,0));
+
+    mObjects.push_back(SecFloor);
+    SecFloor->setPosition(QVector3D(0,0,-20));
 
 
 
@@ -57,6 +62,7 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     KeysPos.push_back(QVector3D(12,6,0));
     KeysPos.push_back(QVector3D(-10,9,0));
     KeysPos.push_back(QVector3D(-9,-6,0));
+     KeysPos.push_back(QVector3D(2,2,-20));
 
     PatrolPos.push_back(QVector3D(-9,-6,0));
     PatrolPos.push_back(QVector3D(-10,9,0));
@@ -67,7 +73,7 @@ Renderer::Renderer(QVulkanWindow *w, bool msaa)
     PatrolPos.push_back(QVector3D(-15,1,0));
 
 
-    for (int var = 0; var < 6; ++var)
+    for (int var = 0; var < 7; ++var)
     {
         mKeys.push_back(new Keys());
 
@@ -415,9 +421,8 @@ void Renderer::startNextFrame()
 
 
 
-    mWindow->frameReady();
-    mWindow->requestUpdate(); // render continuously, throttled by the presentation rate
-
+    // camera moves with player
+    mCamera.setPosition(QVector3D(mPlayer->GetPosition().x(),mPlayer->GetPosition().y(),z));
 
     for (std::vector<VisualObject*>::iterator it=mObjects.begin(); it!=mObjects.end(); it++)
     {
@@ -425,22 +430,37 @@ void Renderer::startNextFrame()
         {
             if(mPlayer->GetCollider().CheckCollision((*it)->GetCollider()))
             {
-                qDebug() << "Checking collision with: " << (*it)->getName();
+                //qDebug() << "Checking collision with: " << (*it)->getName();
                 if((*it)->getName()== "Enemy")
                 {
-                    // mPlayer->OnBeginOverlap((*it)->GetCollider());
+                     mPlayer->OnBeginOverlap((*it)->GetCollider());
+                    break;
                 }
 
-                if((*it)->getName()== "Key")
+                if((*it)->getName()== "Key" &&!(*it)->getbPickUp())
                 {
-                    //(*it)->SetbPickUp(true);
-                    // qDebug() << "bitch";
+                    (*it)->SetbPickUp(true);
+                    OptainedKeys +=1;
+
+                    qDebug() <<"Key Optained" <<OptainedKeys;
+
                 }
                 if((*it)->getName()== "House")
                 {
+                    //qDebug()<<mPlayer->LastPosition;
+                    mPlayer->setPosition(mPlayer->LastPosition);
+                    break;
 
 
                 }
+                if((*it)->getName()== "Door" && OptainedKeys >=6 )
+                {
+                    z= -5;
+                    mPlayer->setPosition(QVector3D(0,0,-20));
+                    mCamera.setPosition(QVector3D(0,0,z));
+                }
+
+
 
 
 
@@ -450,6 +470,26 @@ void Renderer::startNextFrame()
 
 
     }
+
+    if(OptainedKeys >=6 && !bDoorUnlocked)
+    {
+     qDebug() <<"Door Unlock";
+        mDoor->SetbPickUp(false);
+        bDoorUnlocked = true;
+    }
+
+    if(OptainedKeys >=7 && !bPlayerWon)
+    {
+        mPlayer->StopMoving();
+        qDebug() << "Player Won, End Game ";
+        bPlayerWon = true;
+    }
+
+    mWindow->frameReady();
+    mWindow->requestUpdate(); // render continuously, throttled by the presentation rate
+
+
+
 
 
 

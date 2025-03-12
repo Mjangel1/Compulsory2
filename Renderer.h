@@ -8,11 +8,13 @@
 #include "Enemy.h"
 #include "Floor.h"
 #include "House.h"
+#include "HouseDoor.h"
 #include "Keys.h"
 #include "Player.h"
 #include "Triangle.h"
 #include "TriangleSurface.h"
 #include "VisualObject.h"
+#include "secondfloor.h"
 
 
 class Renderer : public QVulkanWindowRenderer
@@ -105,12 +107,20 @@ private:
     QVector<QVector3D> KeysPos;
     std::vector <Keys*> mKeys;
 
+    int OptainedKeys = 0;
+
 
     House* mHouse;
 
     Floor* mFloor = {nullptr};
 
-  //  Door* mDoor;
+    HouseDoor* mDoor;
+    float z=20;
+
+    SecondFloor* SecFloor;
+
+    bool bPlayerWon = false;
+    bool bDoorUnlocked = false;
 
     friend class VulkanWindow;
 

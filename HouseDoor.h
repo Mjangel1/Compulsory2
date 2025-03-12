@@ -14,9 +14,9 @@ private:
     QVector3D DoorPosition;
     ColliderSystem* DoorCollider{nullptr};
 
-    float X = 2;
-    float Y = 2;
-    float Z = 1;
+    float X = 1.5;
+    float Y = 1;
+    float Z = 5;
 
 public:
 

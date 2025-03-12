@@ -90,7 +90,7 @@ House::House() :  VisualObject ()
 void House::Tick(float DeltaTime)
 {
     GetCollider().SetColliderPosition(GetPosition());
-    qDebug() <<GetCollider().GetSize();
+    //qDebug() <<GetCollider().GetSize();
 }
 
 
