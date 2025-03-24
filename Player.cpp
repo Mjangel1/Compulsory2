@@ -151,4 +151,14 @@ void Player::StopMoving()
 
 }
 
+void Player::setSpeed(float speed)
+{
+    mSpeed= speed;
+}
+
+float Player::GetSpeed()
+{
+    return mSpeed;
+}
+
 

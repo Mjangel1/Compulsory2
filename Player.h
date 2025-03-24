@@ -45,6 +45,9 @@ public:
 
     void StopMoving();
 
+    void setSpeed(float speed);
+    float GetSpeed();
+
 
 
 };

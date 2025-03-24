@@ -448,7 +448,15 @@ void Renderer::startNextFrame()
                 if((*it)->getName()== "House")
                 {
                     //qDebug()<<mPlayer->LastPosition;
-                    mPlayer->setPosition(mPlayer->LastPosition);
+
+                    QVector3D direction;
+                    direction =(mPlayer->GetPosition() - mHouse->GetPosition());
+                    direction.normalize();
+                    QVector3D NewPos;
+                    NewPos = mPlayer->GetPosition() + direction*0.1;
+
+
+                    mPlayer->setPosition(NewPos);
                     break;
 
 
