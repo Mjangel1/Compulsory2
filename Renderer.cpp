@@ -453,7 +453,7 @@ void Renderer::startNextFrame()
                     direction =(mPlayer->GetPosition() - mHouse->GetPosition());
                     direction.normalize();
                     QVector3D NewPos;
-                    NewPos = mPlayer->GetPosition() + direction*0.1;
+                    NewPos = mPlayer->GetPosition() + (direction*0.1);
 
 
                     mPlayer->setPosition(NewPos);
